@@ -1,34 +1,18 @@
-///Bismillahir Rahmanir Rahim,Allah Help Me///
 #include<bits/stdc++.h>
 using namespace std;
-long int book[100100];
 int main()
 {
-    long int i,j,n,time,ans,sum;
-    while(cin>>n>>time)
-    {
-        for(i=0;i<n;i++)
-        {
-            cin>>book[i];
+    long int n,t,start=0,ending=0;
+    cin>>n>>t;
+    long int arr[n];
+    for(long int i=0;i<n;i++){
+        cin>>arr[i];
+        t-=arr[i];
+        if(t<0 && i<n){
+            t+=arr[start];
+            start++;
         }
-        //sort(book,book+n);
-        j=-1,sum=0,ans=0;
-        for(i=0;i<n;i++)
-        {
-            if(sum+book[i]<=time)
-                sum+=book[i];
-            else
-            {
-                sum+=book[i];
-                while(sum>time)
-                {
-                    j++;
-                    sum-=book[j];
-                }
-            }
-            ans=max(ans,i-j);
-        }
-        cout<<ans<<endl;
+        if(t==0 || i==n-1) ending=i;
     }
-return 0;
+    cout<<ending-start+1;
 }
